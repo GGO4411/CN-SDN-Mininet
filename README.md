@@ -1,6 +1,6 @@
 # SDN Packet Drop Simulator
 
-**SRN:** PEP &nbsp;|&nbsp; **Name:** GG &nbsp;|&nbsp; **Course:** Software Defined Networking
+**SRN:** PES1UG24CS167 &nbsp;|&nbsp; **Name:** Gandhar Gokhale &nbsp;|&nbsp; **Course:** Computer Networks
 
 A Software Defined Networking project that simulates selective packet loss using OpenFlow flow rules installed via a custom POX controller. Built and tested on Mininet with Open vSwitch.
 
@@ -72,11 +72,14 @@ Copy `packet_drop.py` into POX's extensions directory:
 cp packet_drop.py ~/pox/ext/packet_drop.py
 ```
 
+
 ### Step 2 — Start the POX controller (Terminal 1)
 
 ```bash
 cd ~/pox && python3 pox.py packet_drop
 ```
+
+<img width="802" height="177" alt="image" src="https://github.com/user-attachments/assets/fc6e19ee-b2b5-4879-91d0-4fa0fbcf7996" />
 
 Expected output:
 ```
@@ -90,12 +93,20 @@ INFO:core:POX 0.7.0 (gar) is up.
 ```bash
 sudo mn -c
 ```
+<img width="1471" height="658" alt="image" src="https://github.com/user-attachments/assets/f3b10ccb-3c2c-4316-b902-2f9d953d399a" />
+
 
 ### Step 4 — Run the automated test (Terminal 2)
 
 ```bash
-sudo python3 measure_topo.py
+sudo mn --controller=remote --topo single,3
 ```
+Terminal 2:
+<img width="980" height="424" alt="image" src="https://github.com/user-attachments/assets/692e294c-8694-4934-80cc-0bb3e20cb67b" />
+Terminal 1: 
+
+<img width="807" height="309" alt="image" src="https://github.com/user-attachments/assets/a20fc7ea-2f44-46d5-8603-6852fc1235a1" />
+
 
 This will run 20 pings across 4 host pairs, evaluate pass/fail, dump the flow table, and save results to a timestamped file.
 
@@ -111,6 +122,13 @@ h2 ping -c 5 h1        # Should show 0% loss
 sh ovs-ofctl dump-flows s1
 exit
 ```
+<img width="722" height="264" alt="image" src="https://github.com/user-attachments/assets/e5a33815-7573-4e04-b194-29803bb2547e" />
+
+<img width="736" height="263" alt="image" src="https://github.com/user-attachments/assets/bb21f4fc-cf4a-4f59-989a-3c6fdd338de0" />
+<img width="734" height="639" alt="image" src="https://github.com/user-attachments/assets/6125c8a8-2fcb-4bf2-866f-58a6bd621b93" />
+
+<img width="1475" height="139" alt="image" src="https://github.com/user-attachments/assets/b0dba7ac-a788-4b8d-9c14-e6af3202abe3" />
+
 
 ### Step 6 — View saved results
 
@@ -157,6 +175,8 @@ cat ~/drop_results_*.txt
 
 [Overall] ALL TESTS PASSED
 ```
+<img width="1480" height="688" alt="image" src="https://github.com/user-attachments/assets/4f0a10b5-03d6-45b4-8f2a-a9989aa8f83c" />
+
 
 ### Flow Table (from `ovs-ofctl dump-flows s1`)
 
@@ -166,12 +186,7 @@ priority=210,icmp,nw_src=10.0.0.1,nw_dst=10.0.0.2,icmp_type=0,icmp_code=0  actio
 priority=50, in_port=s1-eth2, dl_src=..., dl_dst=...                         actions=output:s1-eth1
 ...
 ```
-
----
-
-## Screenshots
-
-> *(To be added)*
+<img width="1475" height="139" alt="image" src="https://github.com/user-attachments/assets/05a9a6b7-966f-4c99-b4d2-e8073beb08e0" />
 
 ---
 
