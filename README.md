@@ -64,16 +64,8 @@ After the ping measurements, the test script dumps the OVS flow table using `ovs
 
 ## Running the Project
 
-### Step 1 — Place the controller file
 
-Copy `packet_drop.py` into POX's extensions directory:
-
-```bash
-cp packet_drop.py ~/pox/ext/packet_drop.py
-```
-
-
-### Step 2 — Start the POX controller (Terminal 1)
+### Step 1 — Start the POX controller (Terminal 1)
 
 ```bash
 cd ~/pox && python3 pox.py packet_drop
@@ -82,13 +74,8 @@ cd ~/pox && python3 pox.py packet_drop
 <img width="802" height="177" alt="image" src="https://github.com/user-attachments/assets/fc6e19ee-b2b5-4879-91d0-4fa0fbcf7996" />
 
 Expected output:
-```
-INFO:packet_drop:DROP rule installed: h1->h2 ICMP echo requests only
-INFO:packet_drop:ALLOW rule installed: h1->h2 ICMP echo replies
-INFO:core:POX 0.7.0 (gar) is up.
-```
 
-### Step 3 — Clean any existing Mininet state (Terminal 2)
+### Step 2 — Clean any existing Mininet state (Terminal 2)
 
 ```bash
 sudo mn -c
@@ -96,7 +83,7 @@ sudo mn -c
 <img width="1471" height="658" alt="image" src="https://github.com/user-attachments/assets/f3b10ccb-3c2c-4316-b902-2f9d953d399a" />
 
 
-### Step 4 — Run the automated test (Terminal 2)
+### Step 3 — Run the automated test (Terminal 2)
 
 ```bash
 sudo mn --controller=remote --topo single,3
@@ -108,9 +95,8 @@ Terminal 1:
 <img width="807" height="309" alt="image" src="https://github.com/user-attachments/assets/a20fc7ea-2f44-46d5-8603-6852fc1235a1" />
 
 
-This will run 20 pings across 4 host pairs, evaluate pass/fail, dump the flow table, and save results to a timestamped file.
 
-### Step 5 — Manual verification (inside Mininet CLI)
+### Step 4 — Manual verification (inside Mininet CLI)
 
 After the automated tests complete, the script drops you into a Mininet CLI. Run:
 
@@ -129,8 +115,9 @@ exit
 
 <img width="1475" height="139" alt="image" src="https://github.com/user-attachments/assets/b0dba7ac-a788-4b8d-9c14-e6af3202abe3" />
 
+This will run 20 pings across 4 host pairs, evaluate pass/fail, dump the flow table, and save results to a timestamped file.
 
-### Step 6 — View saved results
+### Step 5 — View saved results
 
 ```bash
 cat ~/drop_results_*.txt
